@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use PhpParser\Node\Expr\Cast\String_;
 
 class User extends Authenticatable
 {
@@ -18,7 +19,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'number',
+        'role',
         'email',
         'password',
     ];
@@ -42,4 +46,36 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function getFullNameAttribute():String
+    {
+        return "{$this->first_name}{$this->last_name}";
+    }
+    public function hasRole(String $role):bool
+    {
+        return $this->role===$role;
+    }
+    public function isSuperAdmin():bool
+    {
+        return $this->role==='super_admin';
+    }
+    public function isRegionAdmin():bool
+    {
+        return $this->role==='region_admin';
+    }
+    public function isCompanyAdmin():bool
+    {
+        return $this->role==='company_admin';
+    }
+    public function isWorker():bool
+    {
+        return $this->role==='worker';
+    }
+    public function isClient():bool
+    {
+        return $this->role==='client';
+    }
+    public function regions()
+    {
+        return $this->hasMany(regions::class,'created_by');
+    }
 }

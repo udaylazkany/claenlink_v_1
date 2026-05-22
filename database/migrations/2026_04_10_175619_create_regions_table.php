@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('regions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('created_by')->constrained('users'); 
             $table->timestamps();
         });
     }

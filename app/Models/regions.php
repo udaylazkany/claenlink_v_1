@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class regions extends Model
 {
     use HasFactory;
+    protected $fillable=['name','created_by'];
+    public function creator()
+    {
+        return $this->belongsTo(User::class,'created_by');
+    }
 }
