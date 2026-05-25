@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/login', [AuthController ::class, 'login']);
+Route::middleware(['auth:sanctum', 'role:super_admin'])->group(function () {
+
+    Route::post('/regions', [RegionsController::class, 'store']);
+    Route::delete('/regions/{id}', [RegionsController::class, 'destroy']);
+
+});
+

@@ -78,4 +78,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(regions::class,'created_by');
     }
+public function devices()
+{
+    return $this->hasMany(UserDevice::class);
+}
+
 }
