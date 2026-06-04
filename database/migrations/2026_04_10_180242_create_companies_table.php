@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('companie_name');
+            $table->string('company_name');
+            $table->string('description');
             $table->string('commercial_register');
             $table->string('health_registry');
+            $table->string('postion');
             $table->boolean('is_available')->default(true);
+            $table->boolean('is_open')->default(true);
             $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });

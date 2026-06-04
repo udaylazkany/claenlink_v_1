@@ -15,7 +15,6 @@ return new class extends Migration
         $table->id();
         $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         $table->string('device_type');
-        $table->string('device_model')->nullable();
         $table->string('fcm_token')->unique();
         $table->boolean('is_primary')->default(false);
         $table->timestamp('last_active_at')->nullable();

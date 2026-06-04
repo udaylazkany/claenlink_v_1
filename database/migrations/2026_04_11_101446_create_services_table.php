@@ -15,9 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('name');
         $table->text('description')->nullable();
-        $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-        $table->boolean('is_active')->default(false);
-        $table->foreignId('suggested_by')->nullable()->constrained('users')->onDelete('set null');
+        $table->boolean('is_available')->default(false);
         $table->string('image')->nullable();
         $table->timestamps();
         });
